@@ -38,6 +38,42 @@ public class Shooting : MonoBehaviour
     }
 }
 
+Перевір, чи все налаштовано правильно в Unity
+На гарматі є компонент Shooting?
+
+Виділи гармату → перевір, чи доданий скрипт Shooting.
+
+Префаб кулі додано до bulletPrefab?
+
+У Inspector → у полі Bullet Prefab перетягни свій префаб кулі.
+
+Об’єкт firePoint створено і додано до firePoint поля?
+
+Переконайся, що ти створив порожній об’єкт, розмістив його на кінчику гармати і перетягнув у скрипт.
+
+Куля має компонент Rigidbody2D?
+
+Це обов'язково — інакше AddForce не працює!
+
+Префаб кулі не знищується миттєво?
+
+Можливо, у кулі є інші скрипти або налаштування, які одразу її видаляють.
+
+На кулі не стоїть Is Kinematic?
+
+У Rigidbody2D куля має бути Dynamic, а Is Kinematic — вимкнено.
+ Якщо нічого не працює:
+Додай в консоль Unity (Ctrl+Shift+C) повідомлення, щоб перевірити, чи викликається метод Shoot():
+
+void Shoot()
+{
+    Debug.Log("Бах! Вистріл!");
+    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+    rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
+}
+
+
 
 
 
